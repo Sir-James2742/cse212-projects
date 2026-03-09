@@ -8,12 +8,17 @@ public static class Arrays
     /// <returns>array of doubles that are the multiples of the supplied number</returns>
     public static double[] MultiplesOf(double number, int length)
     {
-        // TODO Problem 1 Start
-        // Remember: Using comments in your program, write down your process for solving this problem
-        // step by step before you write the code. The plan should be clear enough that it could
-        // be implemented by another person.
+        // decalre a variable to hold the results
+        var results = [];
 
-        return []; // replace this return statement with your own
+        // iterate through the length while multiplying and addding to the results
+        for(int i = 1;i < length; i++)
+        {
+            var value = number * i;
+            results.Add(value);  
+        }
+
+        return results; // return the results
     }
 
     /// <summary>
@@ -25,9 +30,16 @@ public static class Arrays
     /// </summary>
     public static void RotateListRight(List<int> data, int amount)
     {
-        // TODO Problem 2 Start
-        // Remember: Using comments in your program, write down your process for solving this problem
-        // step by step before you write the code. The plan should be clear enough that it could
-        // be implemented by another person.
+        //Determine the index where the list should be split
+        int splitIndex = data.Count - amount;
+        //Create a list containing the last amount elements and first amount elements.
+        List<int> lastPart = data.GetRange(splitIndex, amount);
+        List<int> firstPart = data.GetRange(0, splitIndex);
+        //Clear the original list.
+        data.Clear();
+        //Add the last elements to the list first.
+        data.AddRange(lastPart);
+        //Add the remaining elements (Step 3) after them.
+        data.AddRange(firstPart);
     }
 }
