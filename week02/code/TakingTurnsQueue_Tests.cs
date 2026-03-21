@@ -169,4 +169,86 @@ public class TakingTurnsQueueTests
             );
         }
     }
+     [TestMethod]
+
+    public void TestPriorityQueue_HighestPriority()
+    {
+        var queue = new PriorityQueue();
+        queue.Enqueue("A", 1);
+        queue.Enqueue("B", 5);
+        queue.Enqueue("C", 3);
+
+        var result = queue.Dequeue();
+
+        Assert.AreEqual("B", result);
+    }
+
+    [TestMethod]
+    public void TestPriorityQueue_FIFO_WithSamePriority()
+    {
+        var queue = new PriorityQueue();
+        queue.Enqueue("A", 5);
+        queue.Enqueue("B", 5);
+        queue.Enqueue("C", 5);
+
+        var result = queue.Dequeue();
+
+        Assert.AreEqual("A", result);
+    }
+
+    [TestMethod]
+   
+    public void TestPriorityQueue_EnqueueAddsToBack()
+    {
+        var queue = new PriorityQueue();
+        queue.Enqueue("First", 2);
+        queue.Enqueue("Second", 2);
+
+        var result = queue.Dequeue();
+
+        Assert.AreEqual("First", result);
+    }
+
+    [TestMethod]
+   
+    public void TestPriorityQueue_Removal()
+    {
+        var queue = new PriorityQueue();
+        queue.Enqueue("A", 1);
+
+        queue.Dequeue();
+
+        Assert.ThrowsException<InvalidOperationException>(() => queue.Dequeue());
+    }
+
+    [TestMethod]
+   
+    public void TestPriorityQueue_EmptyQueue()
+    {
+        var queue = new PriorityQueue();
+
+        try
+        {
+            queue.Dequeue();
+            Assert.Fail("Exception should have been thrown.");
+        }
+        catch (InvalidOperationException ex)
+        {
+            Assert.AreEqual("The queue is empty.", ex.Message);
+        }
+    }
+
+    [TestMethod]
+   
+    public void TestPriorityQueue_MultipleDequeues()
+    {
+        var queue = new PriorityQueue();
+        queue.Enqueue("Low", 1);
+        queue.Enqueue("High", 10);
+        queue.Enqueue("Medium", 5);
+
+        Assert.AreEqual("High", queue.Dequeue());
+        Assert.AreEqual("Medium", queue.Dequeue());
+        Assert.AreEqual("Low", queue.Dequeue());
+    }
 }
